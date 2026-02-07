@@ -489,7 +489,7 @@ function initContactForm() {
         submitBtn.disabled = true;
 
         try {
-            const response = await fetch('api/send-email.php', {
+            const response = await fetch('api/send-mail.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
