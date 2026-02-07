@@ -1,0 +1,27 @@
+name: Deploy to Hostinger (SCP/SFTP)
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    name: Deploy site to Hostinger
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Upload files to Hostinger via SCP
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          port: ${{ secrets.HOSTINGER_PORT }}
+          key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          source: "./"
+          target: ${{ secrets.HOSTINGER_REMOTE_PATH }}
+          rm: true
+
+      - name: Finished
+        run: echo "Deploy completed"

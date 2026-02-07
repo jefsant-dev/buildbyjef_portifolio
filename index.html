@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <title>Jeferson Santos | Desenvolvedor Full Stack</title>
+  <meta name="description" content="Portfólio profissional de Jeferson Santos, desenvolvedor full stack.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Jeferson Santos | Desenvolvedor Full Stack">
+  <meta property="og:description" content="Portfólio profissional e projetos reais.">
+  <meta property="og:type" content="website">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- WhatsApp Floating -->
+<a href="https://wa.me/5551994158467?text=Olá%20Jeferson,%20vi%20seu%20portfólio"
+   class="whatsapp-float" target="_blank">WhatsApp</a>
+
+<header class="header">
+  <div class="logo">JS</div>
+  <nav>
+    <button id="langToggle">PT / EN</button>
+    <button id="themeToggle">🌙</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Jeferson Santos</h1>
+  <p class="subtitle" data-pt="Desenvolvedor Full Stack e Automação"
+     data-en="Full Stack Developer & Automation">
+     Desenvolvedor Full Stack e Automação
+  </p>
+  <div class="hero-buttons">
+    <a href="#projects" class="btn">Projetos</a>
+    <a href="https://wa.me/5551994158467" target="_blank" class="btn outline">WhatsApp</a>
+  </div>
+</section>
+
+<section id="about" class="section">
+  <h2 data-pt="Sobre mim" data-en="About me">Sobre mim</h2>
+  <p>
+    Desenvolvedor com experiência em automação de processos, integrações de sistemas
+    e criação de softwares, apps e sites.
+  </p>
+</section>
+
+<section id="stack" class="section">
+  <h2>Stack</h2>
+  <div class="badges">
+    <span>PHP</span><span>Laravel</span><span>JS</span><span>React</span>
+    <span>Node</span><span>Docker</span><span>SQL</span>
+  </div>
+</section>
+
+<section id="projects" class="section">
+  <h2 data-pt="Projetos" data-en="Projects">Projetos</h2>
+
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <img src="assets/img/control-online-1.jpg" alt="Control OnLine">
+      <h3>Control OnLine</h3>
+      <p data-pt="Sistema de gestão e automação empresarial."
+         data-en="Business management and automation system.">
+         Sistema de gestão e automação empresarial.
+      </p>
+    </div>
+
+    <div class="project-card">
+      <img src="assets/img/idealcred.jpg" alt="IdealCred">
+      <h3>IdealCred</h3>
+      <p>CRM e integração de APIs financeiras.</p>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact" class="section">
+  <h2 data-pt="Contato" data-en="Contact">Contato</h2>
+
+  <form id="contactForm">
+    <input type="text" name="name" placeholder="Nome" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <textarea name="message" placeholder="Mensagem" required></textarea>
+    <button type="submit">Enviar</button>
+    <p id="formMsg"></p>
+  </form>
+</section>
+
+<footer>
+  © <span id="year"></span> Jeferson Santos
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
