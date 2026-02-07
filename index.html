@@ -1,99 +1,285 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="dark">
+<!doctype html>
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Jeferson Santos | Desenvolvedor Full Stack</title>
-  <meta name="description" content="Portfólio profissional de Jeferson Santos, desenvolvedor full stack.">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Jeferson Santos | Desenvolvedor Full Stack">
-  <meta property="og:description" content="Portfólio profissional e projetos reais.">
-  <meta property="og:type" content="website">
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jeferson dos Santos — Portfólio</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#">Jeferson dos Santos</a>
+      <div class="actions">
+        <button class="theme-btn" aria-label="Alternar tema">🌙</button>
+        <button class="lang-btn" aria-label="Alternar idioma">EN</button>
+        <a class="cta whatsapp-btn" href="#" id="whatsappBtn">WhatsApp</a>
+      </div>
+    </div>
+  </header>
 
-<!-- WhatsApp Floating -->
-<a href="https://wa.me/5551994158467?text=Olá%20Jeferson,%20vi%20seu%20portfólio"
-   class="whatsapp-float" target="_blank">WhatsApp</a>
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <h1><span data-pt="Desenvolvedor Full Stack" data-en="Full Stack Developer">Desenvolvedor Full Stack</span></h1>
+          <p class="hero-sub" data-pt="Desenvolvimento de sistemas, APIs, web e mobile." data-en="Development of systems, APIs, web and mobile.">Desenvolvimento de sistemas, APIs, web e mobile.</p>
+          <div class="hero-cta">
+            <a class="btn" id="ctaContact" href="#contact" data-pt="Entrar em contato" data-en="Contact">Entrar em contato</a>
+            <a class="btn ghost" id="ctaWhatsapp" href="#" target="_blank">WhatsApp</a>
+          </div>
+        </div>
+        <div class="hero-media">
+          <img src="assets/img/idealcred.jpg" alt="Preview de projeto" />
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section about">
+      <div class="container">
+        <h2 data-pt="Sobre" data-en="About">Sobre</h2>
+        <p>Desenvolvedor com experiência em automação de processos, integrações entre sistemas e criação de sites/Landing Pages. Gosto de comunicar de forma clara e propor melhorias contínuas.</p>
+      </div>
+    </section>
+
+    <section id="projects" class="section projects">
+      <div class="container">
+        <h2 data-pt="Projetos" data-en="Projects">Projetos</h2>
+        <div class="projects-grid">
+          <article class="project-card" data-project="control">
+            <img src="https://buildbyjef.site/img/Tela%20de%20login.jpg" alt="Control OnLine">
+            <h3>Control OnLine</h3>
+            <p>Sistema de gestão interna com automação de processos e integrações.</p>
+            <button class="project-btn">Ver projeto</button>
+          </article>
+
+          <article class="project-card" data-project="idealcred">
+            <img src="https://buildbyjef.site/img/idealcred.jpg" alt="IdealCred">
+            <h3>IdealCred</h3>
+            <p>CRM para controle e geração de propostas de empréstimos.</p>
+            <button class="project-btn">Ver projeto</button>
+          </article>
+
+          <article class="project-card" data-project="conexao">
+            <img src="https://buildbyjef.site/img/CO-INICIAL.jpg" alt="Conexão OnLine">
+            <h3>Conexão OnLine</h3>
+            <p>App/Cartão de benefícios para funcionários — React Native.</p>
+            <button class="project-btn">Ver projeto</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="container">
+        <h2 data-pt="Contato" data-en="Contact">Contato</h2>
+        <div class="contact-grid">
+          <form id="contactForm" class="contact-form">
+            <label for="name">Nome</label>
+            <input id="name" name="name" required>
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required>
+
+            <label for="message">Mensagem</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <div class="form-actions">
+              <button type="submit" class="btn">Enviar</button>
+              <a class="btn ghost" id="downloadCv" href="https://buildbyjef.site/arquivos/Curr%C3%ADculo%20Jeferson%202026.pdf" target="_blank">Baixar Currículo</a>
+            </div>
+          </form>
+
+          <div class="contact-info">
+            <p><strong>Email:</strong> jef.jeferson.sant@gmail.com</p>
+            <p><strong>WhatsApp:</strong> +55 51 99415-8467</p>
+            <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/jeferson-santos-dev/" target="_blank">Perfil</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <small>&copy; <span id="year"></span> Jeferson dos Santos</small>
+    </div>
+  </footer>
+
+  <div id="projectModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close">×</button>
+      <h3 id="modalTitle"></h3>
+      <img id="modalImage" src="" alt="">
+      <p id="modalDescription"></p>
+      <div class="modal-controls">
+        <button class="slide-btn prev">◀</button>
+        <button class="slide-btn next">▶</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
 
 <header class="header">
-  <div class="logo">JS</div>
-  <nav>
-    <button id="langToggle">PT / EN</button>
-    <button id="themeToggle">🌙</button>
-  </nav>
+    <div class="container header-content">
+        <div class="logo">JS</div>
+
+        <nav class="nav">
+            <a href="#hero">Início</a>
+            <a href="#about">Sobre</a>
+            <a href="#experience">Experiência</a>
+            <a href="#projects">Projetos</a>
+            <a href="#contact">Contato</a>
+        </nav>
+
+        <div class="header-actions">
+            <button class="lang-btn">PT / EN</button>
+            <button class="theme-btn">🌙</button>
+        </div>
+    </div>
 </header>
 
-<section class="hero">
-  <h1>Jeferson Santos</h1>
-  <p class="subtitle" data-pt="Desenvolvedor Full Stack e Automação"
-     data-en="Full Stack Developer & Automation">
-     Desenvolvedor Full Stack e Automação
-  </p>
-  <div class="hero-buttons">
-    <a href="#projects" class="btn">Projetos</a>
-    <a href="https://wa.me/5551994158467" target="_blank" class="btn outline">WhatsApp</a>
+<section id="hero" class="hero">
+  <div class="hero-bg"></div>
+
+  <div class="hero-content">
+    <h1>
+      Jeferson Santos<br>
+      <span>Full Stack Developer</span>
+    </h1>
+
+    <p class="hero-sub">
+      Desenvolvimento de sistemas, APIs, aplicações web e mobile,
+      com foco em performance, escalabilidade e experiência do usuário.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#projects" class="btn primary">Ver Projetos</a>
+      <a href="#contact" class="btn outline">Contato</a>
+    </div>
   </div>
 </section>
+
 
 <section id="about" class="section">
-  <h2 data-pt="Sobre mim" data-en="About me">Sobre mim</h2>
-  <p>
-    Desenvolvedor com experiência em automação de processos, integrações de sistemas
-    e criação de softwares, apps e sites.
-  </p>
+    <div class="container">
+        <h3 class="section-title">Sobre mim</h3>
+
+        <p>
+            Sou desenvolvedor com experiência em automação de processos, integrações entre sistemas
+            e criação de softwares e aplicações web. Ao longo da minha trajetória, atuei desde
+            suporte em TI e infraestrutura até o desenvolvimento completo de sistemas de gestão,
+            CRMs, aplicações internas e sites institucionais.
+        </p>
+
+        <p>
+            Tenho perfil analítico, comunicação clara e foco em resolver problemas reais com
+            soluções eficientes, escaláveis e bem estruturadas. Trabalho com código limpo,
+            organização e melhoria contínua das soluções implementadas.
+        </p>
+    </div>
 </section>
 
-<section id="stack" class="section">
-  <h2>Stack</h2>
-  <div class="badges">
-    <span>PHP</span><span>Laravel</span><span>JS</span><span>React</span>
-    <span>Node</span><span>Docker</span><span>SQL</span>
-  </div>
+<section id="experience" class="section alt">
+    <div class="container">
+        <h3 class="section-title">Experiência</h3>
+
+        <div class="experience-item">
+            <h4>OnLine Contabilidade — Desenvolvedor de Software</h4>
+            <span>2021 – 2025</span>
+            <p>
+                Atuação como desenvolvedor full stack com foco em automação de processos e
+                desenvolvimento de sistemas internos. Criação do software de gestão Control OnLine,
+                integrações entre sistemas, desenvolvimento de utilitários e aplicações web, desktop
+                e mobile.
+            </p>
+        </div>
+
+        <div class="experience-item">
+            <h4>Scopel Gestão Hospitalar — Supervisor de TI</h4>
+            <span>2018 – 2021</span>
+            <p>
+                Gerenciamento de servidores, infraestrutura, sites e sistemas internos.
+                Desenvolvimento de aplicações para processos seletivos, portal de transparência,
+                banco de currículos e pesquisas internas.
+            </p>
+        </div>
+    </div>
 </section>
 
 <section id="projects" class="section">
-  <h2 data-pt="Projetos" data-en="Projects">Projetos</h2>
+  <div class="container">
+    <h3 class="section-title">Projetos</h3>
 
-  <div class="projects-grid">
+    <div class="projects-grid">
 
-    <div class="project-card">
-      <img src="assets/img/control-online-1.jpg" alt="Control OnLine">
-      <h3>Control OnLine</h3>
-      <p data-pt="Sistema de gestão e automação empresarial."
-         data-en="Business management and automation system.">
-         Sistema de gestão e automação empresarial.
-      </p>
+      <!-- Control OnLine -->
+      <div class="project-card"
+           data-project="control">
+        <h4>Control OnLine</h4>
+        <p>Sistema de gestão interna com automação e integrações.</p>
+        <span>PHP • JavaScript • SQL</span>
+        <button class="project-btn">Ver detalhes</button>
+      </div>
+
+      <!-- IdealCred -->
+      <div class="project-card"
+           data-project="idealcred">
+        <h4>IdealCred</h4>
+        <p>CRM para propostas de crédito e integração com APIs.</p>
+        <span>Laravel • PHP • Docker</span>
+        <button class="project-btn">Ver detalhes</button>
+      </div>
+
+      <!-- Conexão OnLine -->
+      <div class="project-card"
+           data-project="conexao">
+        <h4>Conexão OnLine</h4>
+        <p>App de benefícios para Android, iOS e Web.</p>
+        <span>React Native • Node.js</span>
+        <button class="project-btn">Ver detalhes</button>
+      </div>
+
     </div>
-
-    <div class="project-card">
-      <img src="assets/img/idealcred.jpg" alt="IdealCred">
-      <h3>IdealCred</h3>
-      <p>CRM e integração de APIs financeiras.</p>
-    </div>
-
   </div>
 </section>
 
-<section id="contact" class="section">
-  <h2 data-pt="Contato" data-en="Contact">Contato</h2>
+<!-- MODAL -->
+<div id="projectModal" class="modal">
+  <div class="modal-content">
+    <button class="modal-close">×</button>
+    <h4 id="modalTitle"></h4>
+    <p id="modalDescription"></p>
 
-  <form id="contactForm">
-    <input type="text" name="name" placeholder="Nome" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <textarea name="message" placeholder="Mensagem" required></textarea>
-    <button type="submit">Enviar</button>
-    <p id="formMsg"></p>
-  </form>
+    <div class="slider">
+      <button class="slide-btn prev">‹</button>
+      <img id="modalImage" src="" alt="">
+      <button class="slide-btn next">›</button>
+    </div>
+  </div>
+</div>
+
+
+<section id="contact" class="section alt">
+    <div class="container">
+        <h3 class="section-title">Contato</h3>
+
+        <p>Se quiser falar sobre projetos, oportunidades ou parcerias, entre em contato.</p>
+
+        <a href="https://wa.me/555198317780" target="_blank" class="btn primary">
+            Falar no WhatsApp
+        </a>
+    </div>
 </section>
 
-<footer>
-  © <span id="year"></span> Jeferson Santos
+<footer class="footer">
+    <div class="container">
+        <p>© Jeferson Santos — Desenvolvedor Full Stack</p>
+    </div>
 </footer>
 
-<script src="js/main.js"></script>
 </body>
 </html>

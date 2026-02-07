@@ -1,0 +1,44 @@
+JEFERSON DOS SANTOS             
+
+PERFIL:
+Desenvolvedor com experiência em automação de processos, integrações entre sistemas e criação de sites/Landing Pages. Atuação do suporte à TI ao desenvolvimento completo de softwares e apps.
+Ao longo da carreira atuei em várias frentes da Informática: suporte ao cliente, infraestrutura e, principalmente, desenvolvimento de software. Gosto de comunicar de forma clara, sintetizar problemas e propor melhorias contínuas nas soluções adotadas.
+
+CELULAR/WHATSAPP:
+51 9 9415 8467
+
+LINKEDIN:
+https://www.linkedin.com/in/jeferson-santos-dev/
+
+CONHECIMENTOS:
+Possuo conhecimentos em JAVA, JAVASCRIPT, HTML, CSS, C, C++, VISUAL BASIC, ASSEMBLY, PHP, SQL, NODE, REACT, REACT NATIVE,  AUTOIT, LARAVEL, FILAMENT, DOCKER, GITHUB/GITLAB, também com uso de IA no desenvolvimento, incluindo contato com Lovable e Supabase e uso de ferramenta Low-Code, como GeneXus.  Além disso, possuo conhecimento e experiência em Cabeamento de Redes e Montagem e Manutenção de Computadores. Capaz e disposto a aprender e desenvolver em qualquer linguagem, paradigma e framework.
+
+
+EXPERIÊNCIA DE TRABALHO:
+
+Desenvolvedor de software
+OnLine Contabilidade | Santa Cruz do Sul-RS
+2021 – 2025
+• Desenvolvimento full stack com foco em software de gestão empresarial e automação.
+• Criação, desde o início, do software de gestão interna e automação de processos da empresa (Control OnLine).
+• Integrações de sistemas e desenvolvimento de utilitários e apps web, desktop e mobile (Conexão OnLine).
+• Criação de sites e Landing Pages, além de configuração e gerenciamento de servidores.
+
+
+Supervisor de TI
+Scopel Gestão Hospitalar | Santa Cruz do Sul-RS
+2018 – 2021
+• Gerenciamento de servidores, sites, antivírus e infraestrutura de hardware (unidades).
+• Desenvolvimento de aplicações para processos seletivos, portal de transparência, banco de currículos e pesquisas.
+• Coordenação de manutenção/contratações locais para alterações necessárias.
+
+EDUCAÇÃO:
+Universidade de Santa Cruz do Sul - UNISC
+2018
+Engenharia da Computação
+
+CURSOS DE APERFEIÇOAMENTO:
+* React Native – Udemy/2021
+* Ferramentas Google – Google/2019
+* Montagem e Manutenção de Computadores – Digital TI/2011
+* Secretariado Administrativo e Contábil – Projeto Crescer/2011
