@@ -217,7 +217,7 @@ const translations = {
         form_send: "Enviar Mensagem",
         form_success: "Mensagem enviada com sucesso! Retornarei em breve.",
         form_error: "Erro ao enviar mensagem. Por favor, tente novamente.",
-        footer_text: "© 2025 Jeferson Santos. Todos os direitos reservados."
+        footer_text: " Jeferson Santos. Todos os direitos reservados."
     },
     en: {
         nav_home: "Home",
@@ -276,7 +276,7 @@ const translations = {
         form_send: "Send Message",
         form_success: "Message sent successfully! I'll get back to you soon.",
         form_error: "Error sending message. Please try again.",
-        footer_text: "© 2025 Jeferson Santos. All rights reserved."
+        footer_text: " Jeferson Santos. All rights reserved."
     }
 };
 
