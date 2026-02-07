@@ -17,12 +17,8 @@ $sql = "INSERT INTO visitantes (
     site_language,
     browser_datetime,
     http_method,
-    hostname,
-    whatsapp_clicked,
-    form_name,
-    form_email,
-    form_message
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    hostname
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $pdo->prepare($sql);
 
@@ -40,11 +36,12 @@ $stmt->execute([
     $data['siteLanguage'] ?? null,
     $data['browserDatetime'] ?? null,
     $_SERVER['REQUEST_METHOD'] ?? null,
-    gethostbyaddr($_SERVER['REMOTE_ADDR']) ?? null,
-    isset($data['whatsappClicked']) ? (int)$data['whatsappClicked'] : 0,
-    $data['form_name'] ?? null,
-    $data['form_email'] ?? null,
-    $data['form_message'] ?? null
+    gethostbyaddr($_SERVER['REMOTE_ADDR']) ?? null
 ]);
 
-echo json_encode(['status' => 'ok']);
+$visitantId = $pdo->lastInsertId();
+
+echo json_encode([
+    'status' => 'ok',
+    'id' => $visitantId
+]);

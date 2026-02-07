@@ -1,285 +1,395 @@
-<!doctype html>
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-BR">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Jeferson dos Santos — Portfólio</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Jeferson Santos - Desenvolvedor Full Stack especializado em automação e integrações">
+    <meta name="keywords" content="desenvolvedor, full stack, automação, integrações, PHP, JavaScript, React">
+    <meta name="author" content="Jeferson Santos">
+    <title>Jeferson Santos | Desenvolvedor Full Stack</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="plugins/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#">Jeferson dos Santos</a>
-      <div class="actions">
-        <button class="theme-btn" aria-label="Alternar tema">🌙</button>
-        <button class="lang-btn" aria-label="Alternar idioma">EN</button>
-        <a class="cta whatsapp-btn" href="#" id="whatsappBtn">WhatsApp</a>
-      </div>
-    </div>
-  </header>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <a href="#home" class="logo">JefSantos.dev</a>
 
-  <main>
-    <section class="hero">
-      <div class="container hero-inner">
-        <div class="hero-text">
-          <h1><span data-pt="Desenvolvedor Full Stack" data-en="Full Stack Developer">Desenvolvedor Full Stack</span></h1>
-          <p class="hero-sub" data-pt="Desenvolvimento de sistemas, APIs, web e mobile." data-en="Development of systems, APIs, web and mobile.">Desenvolvimento de sistemas, APIs, web e mobile.</p>
-          <div class="hero-cta">
-            <a class="btn" id="ctaContact" href="#contact" data-pt="Entrar em contato" data-en="Contact">Entrar em contato</a>
-            <a class="btn ghost" id="ctaWhatsapp" href="#" target="_blank">WhatsApp</a>
-          </div>
-        </div>
-        <div class="hero-media">
-          <img src="assets/img/idealcred.jpg" alt="Preview de projeto" />
-        </div>
-      </div>
-    </section>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link" data-translate="nav_home">Início</a></li>
+                <li><a href="#about" class="nav-link" data-translate="nav_about">Sobre</a></li>
+                <li><a href="#skills" class="nav-link" data-translate="nav_skills">Habilidades</a></li>
+                <li><a href="#experience" class="nav-link" data-translate="nav_experience">Experiência</a></li>
+                <li><a href="#projects" class="nav-link" data-translate="nav_projects">Projetos</a></li>
+                <li><a href="#contact" class="nav-link" data-translate="nav_contact">Contato</a></li>
+            </ul>
 
-    <section id="about" class="section about">
-      <div class="container">
-        <h2 data-pt="Sobre" data-en="About">Sobre</h2>
-        <p>Desenvolvedor com experiência em automação de processos, integrações entre sistemas e criação de sites/Landing Pages. Gosto de comunicar de forma clara e propor melhorias contínuas.</p>
-      </div>
-    </section>
-
-    <section id="projects" class="section projects">
-      <div class="container">
-        <h2 data-pt="Projetos" data-en="Projects">Projetos</h2>
-        <div class="projects-grid">
-          <article class="project-card" data-project="control">
-            <img src="https://buildbyjef.site/img/Tela%20de%20login.jpg" alt="Control OnLine">
-            <h3>Control OnLine</h3>
-            <p>Sistema de gestão interna com automação de processos e integrações.</p>
-            <button class="project-btn">Ver projeto</button>
-          </article>
-
-          <article class="project-card" data-project="idealcred">
-            <img src="https://buildbyjef.site/img/idealcred.jpg" alt="IdealCred">
-            <h3>IdealCred</h3>
-            <p>CRM para controle e geração de propostas de empréstimos.</p>
-            <button class="project-btn">Ver projeto</button>
-          </article>
-
-          <article class="project-card" data-project="conexao">
-            <img src="https://buildbyjef.site/img/CO-INICIAL.jpg" alt="Conexão OnLine">
-            <h3>Conexão OnLine</h3>
-            <p>App/Cartão de benefícios para funcionários — React Native.</p>
-            <button class="project-btn">Ver projeto</button>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="section contact">
-      <div class="container">
-        <h2 data-pt="Contato" data-en="Contact">Contato</h2>
-        <div class="contact-grid">
-          <form id="contactForm" class="contact-form">
-            <label for="name">Nome</label>
-            <input id="name" name="name" required>
-
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" required>
-
-            <label for="message">Mensagem</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-
-            <div class="form-actions">
-              <button type="submit" class="btn">Enviar</button>
-              <a class="btn ghost" id="downloadCv" href="https://buildbyjef.site/arquivos/Curr%C3%ADculo%20Jeferson%202026.pdf" target="_blank">Baixar Currículo</a>
+            <div class="controls">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="lang-toggle" id="langToggle">
+                    <i class="fas fa-globe"></i>
+                    <span id="currentLang">PT</span>
+                </button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
-          </form>
-
-          <div class="contact-info">
-            <p><strong>Email:</strong> jef.jeferson.sant@gmail.com</p>
-            <p><strong>WhatsApp:</strong> +55 51 99415-8467</p>
-            <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/jeferson-santos-dev/" target="_blank">Perfil</a></p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <small>&copy; <span id="year"></span> Jeferson dos Santos</small>
-    </div>
-  </footer>
-
-  <div id="projectModal" class="modal">
-    <div class="modal-content">
-      <button class="modal-close">×</button>
-      <h3 id="modalTitle"></h3>
-      <img id="modalImage" src="" alt="">
-      <p id="modalDescription"></p>
-      <div class="modal-controls">
-        <button class="slide-btn prev">◀</button>
-        <button class="slide-btn next">▶</button>
-      </div>
-    </div>
-  </div>
-
-  <script src="js/main.js"></script>
-</body>
-</html>
-
-<header class="header">
-    <div class="container header-content">
-        <div class="logo">JS</div>
-
-        <nav class="nav">
-            <a href="#hero">Início</a>
-            <a href="#about">Sobre</a>
-            <a href="#experience">Experiência</a>
-            <a href="#projects">Projetos</a>
-            <a href="#contact">Contato</a>
         </nav>
+    </header>
 
-        <div class="header-actions">
-            <button class="lang-btn">PT / EN</button>
-            <button class="theme-btn">🌙</button>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content fade-in-up">
+                <h1>
+                    <span data-translate="hero_greeting">Olá, eu sou</span><br>
+                    <span class="gradient-text">Jeferson Santos</span>
+                </h1>
+                <p class="subtitle" data-translate="hero_title">Desenvolvedor Full Stack | Automação & Integrações</p>
+                <p data-translate="hero_description">
+                    Desenvolvedor com experiência em automação de processos, integrações entre sistemas e criação de
+                    soluções web completas. Transformo ideias em código funcional e eficiente.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        <i class="fas fa-code"></i>
+                        <span data-translate="hero_btn_projects">Ver Projetos</span>
+                    </a>
+                    <a href="https://wa.me/5551994158467" target="_blank" class="btn btn-secondary">
+                        <i class="fab fa-whatsapp"></i>
+                        <span data-translate="hero_btn_contact">Entre em Contato</span>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image fade-in-up">
+                <img src="https://buildbyjef.site/img/Eu-curriculo04.jpg" alt="Jeferson Santos">
+            </div>
         </div>
-    </div>
-</header>
+    </section>
 
-<section id="hero" class="hero">
-  <div class="hero-bg"></div>
+    <!-- About Section -->
+    <section class="section" id="about">
+        <h2 class="section-title" data-translate="about_title">Sobre Mim</h2>
+        <p class="section-subtitle" data-translate="about_subtitle">Conheça um pouco mais sobre minha trajetória
+            profissional</p>
 
-  <div class="hero-content">
-    <h1>
-      Jeferson Santos<br>
-      <span>Full Stack Developer</span>
-    </h1>
+        <div class="about-content">
+            <div class="about-text">
+                <h3 data-translate="about_who">Quem sou eu?</h3>
+                <p data-translate="about_text">
+                    Ao longo da minha carreira, atuei em diversas frentes da Informática: suporte ao cliente,
+                    infraestrutura e, principalmente, desenvolvimento de software. Tenho paixão por comunicar de forma
+                    clara, sintetizar problemas complexos e propor melhorias contínuas nas soluções adotadas.
+                </p>
+                <p data-translate="about_text2">
+                    Minha experiência abrange desde o desenvolvimento full stack de sistemas de gestão empresarial até a
+                    criação de aplicativos mobile e automação de processos. Trabalho com código limpo, boas práticas e
+                    foco em entregar valor real para os usuários.
+                </p>
+                <div class="social-links">
+                    <a href="https://github.com/jefsant-dev" target="_blank" class="social-link" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/jeferson-santos-dev/" target="_blank" class="social-link"
+                        title="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://wa.me/5551994158467" target="_blank" class="social-link" title="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="about-stats">
+                <div class="stat-card">
+                    <div class="number">4+</div>
+                    <div class="label" data-translate="stat_years">Anos de Experiência</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">15+</div>
+                    <div class="label" data-translate="stat_tech">Tecnologias</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">20+</div>
+                    <div class="label" data-translate="stat_projects">Projetos Desenvolvidos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">100%</div>
+                    <div class="label" data-translate="stat_dedication">Dedicação</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <p class="hero-sub">
-      Desenvolvimento de sistemas, APIs, aplicações web e mobile,
-      com foco em performance, escalabilidade e experiência do usuário.
-    </p>
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <h2 class="section-title" data-translate="skills_title">Habilidades & Tecnologias</h2>
+        <p class="section-subtitle" data-translate="skills_subtitle">Tecnologias e ferramentas que domino e utilizo no
+            desenvolvimento</p>
 
-    <div class="hero-actions">
-      <a href="#projects" class="btn primary">Ver Projetos</a>
-      <a href="#contact" class="btn outline">Contato</a>
-    </div>
-  </div>
-</section>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>
+                    <span class="icon"><i class="fas fa-code"></i></span>
+                    <span data-translate="skills_frontend">Frontend</span>
+                </h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">HTML5</span>
+                    <span class="skill-tag">CSS3</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">React Native</span>
+                </div>
+            </div>
 
+            <div class="skill-category">
+                <h3>
+                    <span class="icon"><i class="fas fa-server"></i></span>
+                    <span data-translate="skills_backend">Backend</span>
+                </h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">PHP</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Laravel</span>
+                    <span class="skill-tag">Filament</span>
+                    <span class="skill-tag">Java</span>
+                </div>
+            </div>
 
-<section id="about" class="section">
-    <div class="container">
-        <h3 class="section-title">Sobre mim</h3>
+            <div class="skill-category">
+                <h3>
+                    <span class="icon"><i class="fas fa-database"></i></span>
+                    <span data-translate="skills_database">Database & APIs</span>
+                </h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">REST APIs</span>
+                    <span class="skill-tag">Supabase</span>
+                </div>
+            </div>
 
-        <p>
-            Sou desenvolvedor com experiência em automação de processos, integrações entre sistemas
-            e criação de softwares e aplicações web. Ao longo da minha trajetória, atuei desde
-            suporte em TI e infraestrutura até o desenvolvimento completo de sistemas de gestão,
-            CRMs, aplicações internas e sites institucionais.
+            <div class="skill-category">
+                <h3>
+                    <span class="icon"><i class="fas fa-tools"></i></span>
+                    <span data-translate="skills_tools">DevOps & Tools</span>
+                </h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">GitHub</span>
+                    <span class="skill-tag">GitLab</span>
+                    <span class="skill-tag">GeneXus</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>
+                    <span class="icon"><i class="fas fa-brain"></i></span>
+                    <span data-translate="skills_other">Outros</span>
+                </h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">C/C++</span>
+                    <span class="skill-tag">Visual Basic</span>
+                    <span class="skill-tag">AutoIt</span>
+                    <span class="skill-tag">Assembly</span>
+                    <span class="skill-tag">AI Tools</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>
+                    <span class="icon"><i class="fas fa-network-wired"></i></span>
+                    <span data-translate="skills_infrastructure">Infraestrutura</span>
+                </h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Networking</span>
+                    <span class="skill-tag">Servers</span>
+                    <span class="skill-tag">WordPress</span>
+                    <span class="skill-tag">Elementor</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section" id="experience">
+        <h2 class="section-title" data-translate="exp_title">Experiência Profissional</h2>
+        <p class="section-subtitle" data-translate="exp_subtitle">Minha trajetória profissional e principais conquistas
         </p>
 
-        <p>
-            Tenho perfil analítico, comunicação clara e foco em resolver problemas reais com
-            soluções eficientes, escaláveis e bem estruturadas. Trabalho com código limpo,
-            organização e melhoria contínua das soluções implementadas.
-        </p>
-    </div>
-</section>
+        <div class="experience-timeline">
+            <div class="experience-item">
+                <h3 data-translate="exp1_role">Desenvolvedor de Software</h3>
+                <div class="company">OnLine Contabilidade | Santa Cruz do Sul-RS</div>
+                <div class="period">2021 – 2025</div>
+                <ul>
+                    <li data-translate="exp1_item1">Desenvolvimento full stack com foco em software de gestão
+                        empresarial e automação</li>
+                    <li data-translate="exp1_item2">Criação, desde o início, do software de gestão interna e automação
+                        de processos da empresa (Control OnLine)</li>
+                    <li data-translate="exp1_item3">Integrações de sistemas e desenvolvimento de utilitários e apps web,
+                        desktop e mobile (Conexão OnLine)</li>
+                    <li data-translate="exp1_item4">Criação de sites e Landing Pages, além de configuração e
+                        gerenciamento de servidores</li>
+                </ul>
+            </div>
 
-<section id="experience" class="section alt">
-    <div class="container">
-        <h3 class="section-title">Experiência</h3>
-
-        <div class="experience-item">
-            <h4>OnLine Contabilidade — Desenvolvedor de Software</h4>
-            <span>2021 – 2025</span>
-            <p>
-                Atuação como desenvolvedor full stack com foco em automação de processos e
-                desenvolvimento de sistemas internos. Criação do software de gestão Control OnLine,
-                integrações entre sistemas, desenvolvimento de utilitários e aplicações web, desktop
-                e mobile.
-            </p>
+            <div class="experience-item">
+                <h3 data-translate="exp2_role">Supervisor de TI</h3>
+                <div class="company">Scopel Gestão Hospitalar | Santa Cruz do Sul-RS</div>
+                <div class="period">2018 – 2021</div>
+                <ul>
+                    <li data-translate="exp2_item1">Gerenciamento de servidores, sites, antivírus e infraestrutura de
+                        hardware</li>
+                    <li data-translate="exp2_item2">Desenvolvimento de aplicações para processos seletivos, portal de
+                        transparência, banco de currículos e pesquisas</li>
+                    <li data-translate="exp2_item3">Coordenação de manutenção e contratações locais para alterações
+                        necessárias</li>
+                </ul>
+            </div>
         </div>
+    </section>
 
-        <div class="experience-item">
-            <h4>Scopel Gestão Hospitalar — Supervisor de TI</h4>
-            <span>2018 – 2021</span>
-            <p>
-                Gerenciamento de servidores, infraestrutura, sites e sistemas internos.
-                Desenvolvimento de aplicações para processos seletivos, portal de transparência,
-                banco de currículos e pesquisas internas.
-            </p>
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <h2 class="section-title" data-translate="projects_title">Projetos em Destaque</h2>
+        <p class="section-subtitle" data-translate="projects_subtitle">Alguns dos principais projetos que desenvolvi</p>
+
+        <div class="projects-grid" id="projectsGrid">
+            <!-- Projects will be inserted here by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <h2 class="section-title" data-translate="contact_title">Entre em Contato</h2>
+        <p class="section-subtitle" data-translate="contact_subtitle">Vamos trabalhar juntos? Envie-me uma mensagem!</p>
+
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="icon"><i class="fab fa-whatsapp"></i></div>
+                    <div class="details">
+                        <h4>WhatsApp</h4>
+                        <p><a href="https://wa.me/5551994158467" target="_blank">+55 51 9 9415-8467</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="icon"><i class="fas fa-envelope"></i></div>
+                    <div class="details">
+                        <h4>Email</h4>
+                        <p><a href="mailto:jef.jeferson.sant@gmail.com">jef.jeferson.sant@gmail.com</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="icon"><i class="fab fa-linkedin"></i></div>
+                    <div class="details">
+                        <h4>LinkedIn</h4>
+                        <p><a href="https://www.linkedin.com/in/jeferson-santos-dev/"
+                                target="_blank">jeferson-santos-dev</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="icon"><i class="fab fa-github"></i></div>
+                    <div class="details">
+                        <h4>GitHub</h4>
+                        <p><a href="https://github.com/jefsant-dev" target="_blank">jefsant-dev</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <div class="form-alert" id="formAlert"></div>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name" data-translate="form_name">Nome</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" data-translate="form_email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject" data-translate="form_subject">Assunto</label>
+                        <select id="subject" name="subject" required>
+                            <option value="" data-translate="form_select">Selecione...</option>
+                            <option value="Desenvolvimento de Software" data-translate="form_opt1">Desenvolvimento de
+                                Software</option>
+                            <option value="Consultoria" data-translate="form_opt2">Consultoria</option>
+                            <option value="Automação de Processos" data-translate="form_opt3">Automação de Processos
+                            </option>
+                            <option value="Freelance" data-translate="form_opt4">Trabalho Freelance</option>
+                            <option value="Outro" data-translate="form_opt5">Outro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message" data-translate="form_message">Mensagem</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-paper-plane"></i>
+                        <span data-translate="form_send">Enviar Mensagem</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="social-links" style="justify-content: center;">
+                <a href="https://github.com/jefsant-dev" target="_blank" class="social-link">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/jeferson-santos-dev/" target="_blank" class="social-link">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://wa.me/5551994158467" target="_blank" class="social-link">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+            <p data-translate="footer_text">&copy; <span id="year"></span> Jeferson Santos. Todos os direitos
+                reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Project Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-images" id="modalImages"></div>
+            <div class="modal-details">
+                <h2 id="modalTitle"></h2>
+                <p id="modalDescription"></p>
+                <div class="project-tech" id="modalTech"></div>
+            </div>
         </div>
     </div>
-</section>
 
-<section id="projects" class="section">
-  <div class="container">
-    <h3 class="section-title">Projetos</h3>
-
-    <div class="projects-grid">
-
-      <!-- Control OnLine -->
-      <div class="project-card"
-           data-project="control">
-        <h4>Control OnLine</h4>
-        <p>Sistema de gestão interna com automação e integrações.</p>
-        <span>PHP • JavaScript • SQL</span>
-        <button class="project-btn">Ver detalhes</button>
-      </div>
-
-      <!-- IdealCred -->
-      <div class="project-card"
-           data-project="idealcred">
-        <h4>IdealCred</h4>
-        <p>CRM para propostas de crédito e integração com APIs.</p>
-        <span>Laravel • PHP • Docker</span>
-        <button class="project-btn">Ver detalhes</button>
-      </div>
-
-      <!-- Conexão OnLine -->
-      <div class="project-card"
-           data-project="conexao">
-        <h4>Conexão OnLine</h4>
-        <p>App de benefícios para Android, iOS e Web.</p>
-        <span>React Native • Node.js</span>
-        <button class="project-btn">Ver detalhes</button>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- MODAL -->
-<div id="projectModal" class="modal">
-  <div class="modal-content">
-    <button class="modal-close">×</button>
-    <h4 id="modalTitle"></h4>
-    <p id="modalDescription"></p>
-
-    <div class="slider">
-      <button class="slide-btn prev">‹</button>
-      <img id="modalImage" src="" alt="">
-      <button class="slide-btn next">›</button>
-    </div>
-  </div>
-</div>
-
-
-<section id="contact" class="section alt">
-    <div class="container">
-        <h3 class="section-title">Contato</h3>
-
-        <p>Se quiser falar sobre projetos, oportunidades ou parcerias, entre em contato.</p>
-
-        <a href="https://wa.me/555198317780" target="_blank" class="btn primary">
-            Falar no WhatsApp
-        </a>
-    </div>
-</section>
-
-<footer class="footer">
-    <div class="container">
-        <p>© Jeferson Santos — Desenvolvedor Full Stack</p>
-    </div>
-</footer>
-
+    <script src="js/main.js"></script>
 </body>
+
 </html>
