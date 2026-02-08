@@ -44,6 +44,10 @@ document.addEventListener("DOMContentLoaded", () => {
 // Ano automático
 document.getElementById("year").textContent = new Date().getFullYear();
 
+// ===================================
+// DATA & TRANSLATIONS
+// ===================================
+
 // Projects Data
 const projectsData = {
     pt: [
@@ -217,7 +221,11 @@ const translations = {
         form_send: "Enviar Mensagem",
         form_success: "Mensagem enviada com sucesso! Retornarei em breve.",
         form_error: "Erro ao enviar mensagem. Por favor, tente novamente.",
-        footer_text: " Jeferson Santos. Todos os direitos reservados."
+        footer_text: " Jeferson Santos. Todos os direitos reservados.",
+        easter_found: "🎉 Easter Egg descoberto!",
+        easter_dev: "🚀 Modo Desenvolvedor ativado!",
+        easter_konami: "🎮 Código Konami! Você é old school!",
+        easter_click: "🖱️ Você encontrou o clique secreto!"
     },
     en: {
         nav_home: "Home",
@@ -276,15 +284,35 @@ const translations = {
         form_send: "Send Message",
         form_success: "Message sent successfully! I'll get back to you soon.",
         form_error: "Error sending message. Please try again.",
-        footer_text: " Jeferson Santos. All rights reserved."
+        footer_text: " Jeferson Santos. All rights reserved.",
+        easter_found: "🎉 Easter Egg found!",
+        easter_dev: "🚀 Developer Mode activated!",
+        easter_konami: "🎮 Konami Code! You're old school!",
+        easter_click: "🖱️ You found the secret click!"
     }
 };
 
-// App State
+// ===================================
+// APP STATE
+// ===================================
 let currentLang = 'pt';
 let currentTheme = 'dark';
 
-// Initialize
+// Easter Eggs state
+const easterEggs = {
+    konamiCode: [],
+    konamiSequence: ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'],
+    devModeClicks: 0,
+    found: {
+        konami: false,
+        devMode: false,
+        secretClick: false
+    }
+};
+
+// ===================================
+// INITIALIZATION
+// ===================================
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initLanguage();
@@ -294,18 +322,24 @@ document.addEventListener('DOMContentLoaded', () => {
     initContactForm();
     initModal();
     initHeaderScroll();
+    initParallax();
+    initSmoothScroll();
+    initCounterAnimation();
+    initEasterEggs();
 });
 
-// Theme Toggle
+// ===================================
+// THEME MANAGEMENT
+// ===================================
 function initTheme() {
     const savedTheme = localStorage.getItem('theme') || 'dark';
     currentTheme = savedTheme;
-
+    
     if (savedTheme === 'light') {
         document.documentElement.setAttribute('data-theme', 'light');
         updateThemeIcon('light');
     }
-
+    
     document.getElementById('themeToggle').addEventListener('click', toggleTheme);
 }
 
@@ -314,6 +348,9 @@ function toggleTheme() {
     document.documentElement.setAttribute('data-theme', currentTheme);
     localStorage.setItem('theme', currentTheme);
     updateThemeIcon(currentTheme);
+    
+    // Add transition effect
+    document.body.style.transition = 'background-color 0.5s ease, color 0.5s ease';
 }
 
 function updateThemeIcon(theme) {
@@ -321,12 +358,14 @@ function updateThemeIcon(theme) {
     icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
 }
 
-// Language Toggle
+// ===================================
+// LANGUAGE MANAGEMENT
+// ===================================
 function initLanguage() {
     const savedLang = localStorage.getItem('language') || 'pt';
     currentLang = savedLang;
     updateLanguage(savedLang);
-
+    
     document.getElementById('langToggle').addEventListener('click', toggleLanguage);
 }
 
@@ -334,13 +373,12 @@ function toggleLanguage() {
     currentLang = currentLang === 'pt' ? 'en' : 'pt';
     localStorage.setItem('language', currentLang);
     updateLanguage(currentLang);
-    renderProjects(); // Re-render projects with new language
+    renderProjects();
 }
 
 function updateLanguage(lang) {
     document.getElementById('currentLang').textContent = lang.toUpperCase();
-
-    // Update all translatable elements
+    
     document.querySelectorAll('[data-translate]').forEach(element => {
         const key = element.getAttribute('data-translate');
         if (translations[lang][key]) {
@@ -355,18 +393,19 @@ function updateLanguage(lang) {
     });
 }
 
-// Mobile Menu
+// ===================================
+// MOBILE MENU
+// ===================================
 function initMobileMenu() {
     const toggle = document.getElementById('mobileMenuToggle');
     const menu = document.getElementById('navMenu');
-
+    
     toggle.addEventListener('click', () => {
         menu.classList.toggle('active');
         const icon = toggle.querySelector('i');
         icon.className = menu.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
     });
-
-    // Close menu when clicking on a link
+    
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
             menu.classList.remove('active');
@@ -375,22 +414,31 @@ function initMobileMenu() {
     });
 }
 
-// Scroll Animations
+// ===================================
+// SCROLL ANIMATIONS
+// ===================================
 function initScrollAnimations() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
+                
+                // Trigger counter animation for stats
+                if (entry.target.id === 'about') {
+                    animateCounters();
+                }
             }
         });
     }, { threshold: 0.1 });
-
+    
     document.querySelectorAll('.section').forEach(section => {
         observer.observe(section);
     });
 }
 
-// Header Scroll Effect
+// ===================================
+// HEADER SCROLL EFFECT
+// ===================================
 function initHeaderScroll() {
     window.addEventListener('scroll', () => {
         const header = document.getElementById('header');
@@ -402,7 +450,82 @@ function initHeaderScroll() {
     });
 }
 
-// Projects
+// ===================================
+// PARALLAX EFFECT
+// ===================================
+function initParallax() {
+    const parallaxElements = document.querySelectorAll('.parallax-section, .parallax-element');
+    
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        
+        parallaxElements.forEach(element => {
+            const speed = element.dataset.speed || 0.5;
+            const yPos = -(scrolled * speed);
+            element.style.transform = `translateY(${yPos}px)`;
+        });
+    });
+}
+
+// ===================================
+// SMOOTH SCROLL
+// ===================================
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href !== '#' && href.length > 1) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+}
+
+// ===================================
+// COUNTER ANIMATION
+// ===================================
+function initCounterAnimation() {
+    // Will be triggered when about section becomes visible
+}
+
+function animateCounters() {
+    const counters = document.querySelectorAll('.stat-card[data-count]');
+    
+    counters.forEach(counter => {
+        const target = parseInt(counter.dataset.count);
+        const numberElement = counter.querySelector('.number');
+        const duration = 2000; // 2 seconds
+        const increment = target / (duration / 16); // 60fps
+        let current = 0;
+        
+        const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+                numberElement.textContent = Math.floor(current) + (target === 100 ? '' : '+');
+                requestAnimationFrame(updateCounter);
+            } else {
+                numberElement.textContent = target + (target === 100 ? '%' : '+');
+            }
+        };
+        
+        updateCounter();
+    });
+}
+
+// ===================================
+// PROJECTS
+// ===================================
 function initProjects() {
     renderProjects();
 }
@@ -410,31 +533,33 @@ function initProjects() {
 function renderProjects() {
     const grid = document.getElementById('projectsGrid');
     const projects = projectsData[currentLang];
-
+    
     grid.innerHTML = projects.map((project, index) => `
-                <div class="project-card" onclick="openModal(${index})">
-                    <img src="${project.images[0].url}" alt="${project.images[0].alt}" class="project-image" loading="lazy">
-                    <div class="project-content">
-                        <h3>${project.name}</h3>
-                        <p>${project.description.substring(0, 120)}...</p>
-                        <div class="project-tech">
-                            ${project.tech.slice(0, 4).map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-                        </div>
-                    </div>
+        <div class="project-card" onclick="openModal(${index})">
+            <img src="${project.images[0].url}" alt="${project.images[0].alt}" class="project-image" loading="lazy">
+            <div class="project-content">
+                <h3>${project.name}</h3>
+                <p>${project.description.substring(0, 120)}...</p>
+                <div class="project-tech">
+                    ${project.tech.slice(0, 4).map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
                 </div>
-            `).join('');
+            </div>
+        </div>
+    `).join('');
 }
 
-// Modal
+// ===================================
+// MODAL
+// ===================================
 function initModal() {
     const modal = document.getElementById('projectModal');
     const closeBtn = document.getElementById('modalClose');
-
+    
     closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => {
         if (e.target === modal) closeModal();
     });
-
+    
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeModal();
     });
@@ -443,20 +568,20 @@ function initModal() {
 function openModal(index) {
     const modal = document.getElementById('projectModal');
     const project = projectsData[currentLang][index];
-
+    
     document.getElementById('modalTitle').textContent = project.name;
     document.getElementById('modalDescription').textContent = project.description;
-
-    const imagesHtml = project.images.map(img =>
+    
+    const imagesHtml = project.images.map(img => 
         `<img src="${img.url}" alt="${img.alt}" loading="lazy">`
     ).join('');
     document.getElementById('modalImages').innerHTML = imagesHtml;
-
-    const techHtml = project.tech.map(tech =>
+    
+    const techHtml = project.tech.map(tech => 
         `<span class="tech-tag">${tech}</span>`
     ).join('');
     document.getElementById('modalTech').innerHTML = techHtml;
-
+    
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
@@ -467,27 +592,23 @@ function closeModal() {
     document.body.style.overflow = '';
 }
 
-// Contact Form
+// ===================================
+// CONTACT FORM
+// ===================================
 function initContactForm() {
     const form = document.getElementById('contactForm');
-
+    
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-
+        
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
         
-        // Adicionar visitantId se disponível
-        const visitantId = sessionStorage.getItem('visitantId');
-        if (visitantId) {
-            data.visitantId = visitantId;
-        }
-
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
         submitBtn.disabled = true;
-
+        
         try {
             const response = await fetch('api/send-mail.php', {
                 method: 'POST',
@@ -496,9 +617,9 @@ function initContactForm() {
                 },
                 body: JSON.stringify(data)
             });
-
+            
             const result = await response.json();
-
+            
             if (result.success) {
                 showAlert('success', translations[currentLang].form_success);
                 form.reset();
@@ -518,8 +639,231 @@ function showAlert(type, message) {
     const alert = document.getElementById('formAlert');
     alert.className = `form-alert ${type} show`;
     alert.textContent = message;
-
+    
     setTimeout(() => {
         alert.classList.remove('show');
     }, 5000);
 }
+
+// ===================================
+// EASTER EGGS
+// ===================================
+function initEasterEggs() {
+    // Konami Code
+    document.addEventListener('keydown', handleKonamiCode);
+    
+    // Triple click on logo (Dev Mode)
+    const logo = document.querySelector('.logo');
+    logo.addEventListener('click', handleDevModeClick);
+    
+    // Secret click on profile image
+    const profileImg = document.getElementById('profileImage');
+    if (profileImg) {
+        let clickCount = 0;
+        profileImg.addEventListener('click', (e) => {
+            e.stopPropagation();
+            clickCount++;
+            if (clickCount === 5 && !easterEggs.found.secretClick) {
+                triggerEasterEgg('secretClick', translations[currentLang].easter_click);
+                launchConfetti();
+            }
+            setTimeout(() => clickCount = 0, 2000);
+        });
+    }
+    
+    // Typing "dev" anywhere triggers easter egg
+    let typedKeys = '';
+    document.addEventListener('keypress', (e) => {
+        typedKeys += e.key;
+        if (typedKeys.includes('dev') && !easterEggs.found.devMode) {
+            triggerEasterEgg('devMode', translations[currentLang].easter_dev);
+            console.log('%c🚀 DEV MODE ACTIVATED!', 'font-size: 20px; color: #6366f1; font-weight: bold;');
+            console.log('%cPortfolio by Jeferson Santos', 'font-size: 14px; color: #8b5cf6;');
+            console.log('%cTech Stack: HTML5, CSS3, JavaScript (Vanilla)', 'font-size: 12px; color: #ec4899;');
+        }
+        if (typedKeys.length > 10) typedKeys = typedKeys.slice(-10);
+    });
+}
+
+function handleKonamiCode(e) {
+    easterEggs.konamiCode.push(e.key);
+    if (easterEggs.konamiCode.length > 10) {
+        easterEggs.konamiCode.shift();
+    }
+    
+    if (JSON.stringify(easterEggs.konamiCode) === JSON.stringify(easterEggs.konamiSequence)) {
+        if (!easterEggs.found.konami) {
+            triggerEasterEgg('konami', translations[currentLang].easter_konami);
+            launchConfetti();
+            makeItRain();
+        }
+    }
+}
+
+function handleDevModeClick() {
+    easterEggs.devModeClicks++;
+    if (easterEggs.devModeClicks === 3 && !easterEggs.found.devMode) {
+        triggerEasterEgg('devMode', translations[currentLang].easter_dev);
+    }
+    setTimeout(() => easterEggs.devModeClicks = 0, 1000);
+}
+
+function triggerEasterEgg(type, message) {
+    easterEggs.found[type] = true;
+    showEasterEggNotification(message);
+}
+
+function showEasterEggNotification(message) {
+    const notification = document.getElementById('easterEggNotification');
+    const text = document.getElementById('easterEggText');
+    text.textContent = message;
+    notification.classList.add('show');
+    
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 4000);
+}
+
+// ===================================
+// CONFETTI EFFECT
+// ===================================
+function launchConfetti() {
+    const canvas = document.getElementById('confettiCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const particles = [];
+    const particleCount = 150;
+    const colors = ['#6366f1', '#8b5cf6', '#ec4899', '#10b981', '#f59e0b'];
+    
+    for (let i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height - canvas.height,
+            r: Math.random() * 6 + 2,
+            d: Math.random() * particleCount,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            tilt: Math.random() * 10 - 10,
+            tiltAngleIncremental: Math.random() * 0.07 + 0.05,
+            tiltAngle: 0
+        });
+    }
+    
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        particles.forEach((p, i) => {
+            ctx.beginPath();
+            ctx.lineWidth = p.r / 2;
+            ctx.strokeStyle = p.color;
+            ctx.moveTo(p.x + p.tilt + p.r, p.y);
+            ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r);
+            ctx.stroke();
+        });
+        
+        update();
+    }
+    
+    function update() {
+        particles.forEach((p, i) => {
+            p.tiltAngle += p.tiltAngleIncremental;
+            p.y += (Math.cos(p.d) + 3 + p.r / 2) / 2;
+            p.tilt = Math.sin(p.tiltAngle - i / 3) * 15;
+            
+            if (p.y > canvas.height) {
+                particles[i] = { ...p, y: -10, x: Math.random() * canvas.width };
+            }
+        });
+    }
+    
+    let animationId;
+    let frameCount = 0;
+    function animate() {
+        draw();
+        frameCount++;
+        if (frameCount < 300) { // Run for ~5 seconds
+            animationId = requestAnimationFrame(animate);
+        } else {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    }
+    
+    animate();
+}
+
+// ===================================
+// MAKE IT RAIN (Bonus effect)
+// ===================================
+function makeItRain() {
+    const colors = ['#6366f1', '#8b5cf6', '#ec4899'];
+    const duration = 3000;
+    const particleCount = 50;
+    
+    for (let i = 0; i < particleCount; i++) {
+        setTimeout(() => {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.width = '10px';
+            particle.style.height = '10px';
+            particle.style.borderRadius = '50%';
+            particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = '-10px';
+            particle.style.pointerEvents = 'none';
+            particle.style.zIndex = '10000';
+            particle.style.opacity = '0.8';
+            
+            document.body.appendChild(particle);
+            
+            const fallDuration = Math.random() * 2000 + 1000;
+            const startTime = Date.now();
+            
+            function fall() {
+                const elapsed = Date.now() - startTime;
+                const progress = elapsed / fallDuration;
+                
+                if (progress < 1) {
+                    particle.style.top = (progress * window.innerHeight) + 'px';
+                    particle.style.opacity = 1 - progress;
+                    requestAnimationFrame(fall);
+                } else {
+                    particle.remove();
+                }
+            }
+            
+            fall();
+        }, i * (duration / particleCount));
+    }
+}
+
+// ===================================
+// UTILITY FUNCTIONS
+// ===================================
+
+// Debounce function for performance
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Handle window resize
+window.addEventListener('resize', debounce(() => {
+    const canvas = document.getElementById('confettiCanvas');
+    if (canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+}, 250));
+
+// Log welcome message
+console.log('%c👋 Olá! Bem-vindo ao meu portfólio!', 'font-size: 16px; color: #6366f1; font-weight: bold;');
+console.log('%c🎮 Tente encontrar todos os Easter Eggs!', 'font-size: 14px; color: #8b5cf6;');
+console.log('%cDica: Experimente o Konami Code... 😉', 'font-size: 12px; color: #ec4899;');
