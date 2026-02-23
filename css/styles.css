@@ -130,47 +130,14 @@ body {
     }
 }
 
-/* Floating Particles */
-.particles {
+/* Plexus Canvas */
+#plexusCanvas {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-}
-
-.particle {
-    position: absolute;
-    background: var(--accent-primary);
-    border-radius: 50%;
-    opacity: 0.1;
-    animation: float linear infinite;
-}
-
-[data-theme="light"] .particle {
-    opacity: 0.05;
-}
-
-.particle:nth-child(1) { width: 3px; height: 3px; left: 10%; animation-duration: 15s; animation-delay: 0s; }
-.particle:nth-child(2) { width: 5px; height: 5px; left: 20%; animation-duration: 20s; animation-delay: 2s; }
-.particle:nth-child(3) { width: 2px; height: 2px; left: 30%; animation-duration: 18s; animation-delay: 4s; }
-.particle:nth-child(4) { width: 4px; height: 4px; left: 40%; animation-duration: 22s; animation-delay: 1s; }
-.particle:nth-child(5) { width: 3px; height: 3px; left: 50%; animation-duration: 17s; animation-delay: 3s; }
-.particle:nth-child(6) { width: 5px; height: 5px; left: 60%; animation-duration: 19s; animation-delay: 5s; }
-.particle:nth-child(7) { width: 2px; height: 2px; left: 70%; animation-duration: 21s; animation-delay: 2s; }
-.particle:nth-child(8) { width: 4px; height: 4px; left: 80%; animation-duration: 16s; animation-delay: 4s; }
-.particle:nth-child(9) { width: 3px; height: 3px; left: 90%; animation-duration: 23s; animation-delay: 1s; }
-.particle:nth-child(10) { width: 5px; height: 5px; left: 15%; animation-duration: 20s; animation-delay: 6s; }
-
-@keyframes float {
-    0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-    }
-    10% { opacity: 0.1; }
-    90% { opacity: 0.1; }
-    100% {
-        transform: translateY(-100px) rotate(360deg);
-        opacity: 0;
-    }
+    pointer-events: none;
 }
 
 /* Grid Pattern */
@@ -574,7 +541,7 @@ body {
    SECTION STYLES
    =================================== */
 .section {
-    padding: 6rem 2rem;
+    padding: 5rem 2rem 4rem;
     max-width: 1200px;
     margin: 0 auto;
     opacity: 0;
@@ -1074,6 +1041,12 @@ body {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+}
+
+.contact-cv-btn {
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.5rem;
 }
 
 .contact-item {

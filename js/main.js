@@ -176,6 +176,7 @@ const translations = {
         hero_description: "Desenvolvedor com experiência em automação de processos, integrações entre sistemas e criação de soluções web completas. Transformo ideias em código funcional e eficiente.",
         hero_btn_projects: "Ver Projetos",
         hero_btn_contact: "Entre em Contato",
+        hero_btn_cv: "Download CV",
         about_title: "Sobre Mim",
         about_subtitle: "Conheça um pouco mais sobre minha trajetória profissional",
         about_who: "Quem sou eu?",
@@ -222,6 +223,7 @@ const translations = {
         form_success: "Mensagem enviada com sucesso! Retornarei em breve.",
         form_error: "Erro ao enviar mensagem. Por favor, tente novamente.",
         footer_text: " Jeferson Santos. Todos os direitos reservados.",
+        contact_btn_cv: "Download Currículo (PDF)",
         easter_found: "🎉 Easter Egg descoberto!",
         easter_dev: "🚀 Modo Desenvolvedor ativado!",
         easter_konami: "🎮 Código Konami! Você é old school!",
@@ -239,6 +241,7 @@ const translations = {
         hero_description: "Developer with experience in process automation, system integrations and creation of complete web solutions. I transform ideas into functional and efficient code.",
         hero_btn_projects: "View Projects",
         hero_btn_contact: "Get in Touch",
+        hero_btn_cv: "Download CV",
         about_title: "About Me",
         about_subtitle: "Learn more about my professional journey",
         about_who: "Who am I?",
@@ -285,6 +288,7 @@ const translations = {
         form_success: "Message sent successfully! I'll get back to you soon.",
         form_error: "Error sending message. Please try again.",
         footer_text: " Jeferson Santos. All rights reserved.",
+        contact_btn_cv: "Download Resume (PDF)",
         easter_found: "🎉 Easter Egg found!",
         easter_dev: "🚀 Developer Mode activated!",
         easter_konami: "🎮 Konami Code! You're old school!",
@@ -326,6 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
     initCounterAnimation();
     initEasterEggs();
+    initPlexus();
 });
 
 // ===================================
@@ -478,17 +483,102 @@ function initSmoothScroll() {
                 e.preventDefault();
                 const target = document.querySelector(href);
                 if (target) {
-                    const headerOffset = 80;
-                    const elementPosition = target.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                    
+                    const header = document.getElementById('header');
+                    const headerHeight = header ? header.offsetHeight : 80;
+                    // Use offsetTop to avoid parallax transform interference
+                    let top = 0;
+                    let el = target;
+                    while (el) {
+                        top += el.offsetTop;
+                        el = el.offsetParent;
+                    }
                     window.scrollTo({
-                        top: offsetPosition,
+                        top: top - headerHeight - 8,
                         behavior: 'smooth'
                     });
                 }
             }
         });
+    });
+}
+
+// ===================================
+// PLEXUS BACKGROUND EFFECT
+// ===================================
+function initPlexus() {
+    const canvas = document.getElementById('plexusCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    let width, height, particles;
+    const PARTICLE_COUNT = 60;
+    const MAX_DIST = 150;
+    const COLORS = ['rgba(99,102,241,', 'rgba(139,92,246,', 'rgba(0,200,220,'];
+
+    function resize() {
+        width = canvas.width = canvas.offsetWidth;
+        height = canvas.height = canvas.offsetHeight;
+    }
+
+    function createParticles() {
+        particles = [];
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+            const color = COLORS[Math.floor(Math.random() * COLORS.length)];
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                r: Math.random() * 2 + 1,
+                color
+            });
+        }
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, width, height);
+
+        particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0 || p.x > width) p.vx *= -1;
+            if (p.y < 0 || p.y > height) p.vy *= -1;
+        });
+
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < MAX_DIST) {
+                    const alpha = (1 - dist / MAX_DIST) * 0.35;
+                    ctx.beginPath();
+                    ctx.strokeStyle = particles[i].color + alpha + ')';
+                    ctx.lineWidth = 0.7;
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        particles.forEach(p => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = p.color + '0.7)';
+            ctx.fill();
+        });
+
+        requestAnimationFrame(draw);
+    }
+
+    resize();
+    createParticles();
+    draw();
+
+    window.addEventListener('resize', () => {
+        resize();
+        createParticles();
     });
 }
 
@@ -506,20 +596,24 @@ function animateCounters() {
         const target = parseInt(counter.dataset.count);
         const numberElement = counter.querySelector('.number');
         const duration = 2000; // 2 seconds
-        const increment = target / (duration / 16); // 60fps
-        let current = 0;
+        const startTime = performance.now();
         
-        const updateCounter = () => {
-            current += increment;
-            if (current < target) {
-                numberElement.textContent = Math.floor(current) + (target === 100 ? '' : '+');
+        const updateCounter = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // easeOut
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = Math.floor(eased * target);
+            
+            if (progress < 1) {
+                numberElement.textContent = current + (target === 100 ? '' : '+');
                 requestAnimationFrame(updateCounter);
             } else {
                 numberElement.textContent = target + (target === 100 ? '%' : '+');
             }
         };
         
-        updateCounter();
+        requestAnimationFrame(updateCounter);
     });
 }
 
@@ -653,8 +747,8 @@ function initEasterEggs() {
     document.addEventListener('keydown', handleKonamiCode);
     
     // Triple click on logo (Dev Mode)
-    const logo = document.querySelector('.logo');
-    logo.addEventListener('click', handleDevModeClick);
+    const logo = document.querySelector('.logo') || document.getElementById('logoLink');
+    if (logo) logo.addEventListener('click', handleDevModeClick);
     
     // Secret click on profile image
     const profileImg = document.getElementById('profileImage');

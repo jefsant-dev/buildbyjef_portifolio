@@ -28,25 +28,14 @@
     <link rel="stylesheet" href="libs/font-awesome/css/all.min.css">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <!-- Animated Background -->
     <div class="bg-animation">
         <div class="mesh-gradient"></div>
         <div class="grid-pattern"></div>
-        <div class="particles">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-        </div>
+        <canvas id="plexusCanvas"></canvas>
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
         <div class="orb orb-3"></div>
@@ -57,7 +46,7 @@
         <!-- Header -->
         <header class="header" id="header">
             <nav class="nav-container">
-                <a href="#home" class="logo">JefSantos.dev</a>
+                <a href="#home" class="logo" id="logoLink">Jeferson Santos</a>
                 
                 <ul class="nav-menu" id="navMenu">
                     <li><a href="#home" class="nav-link" data-translate="nav_home">Início</a></li>
@@ -103,6 +92,10 @@
                         <a href="https://wa.me/5551994158467" target="_blank" class="btn btn-secondary">
                             <i class="fab fa-whatsapp"></i>
                             <span data-translate="hero_btn_contact">Entre em Contato</span>
+                        </a>
+                        <a href="arquivos/Currículo_Jeferson_Santos.pdf" download class="btn btn-secondary">
+                            <i class="fas fa-file-pdf"></i>
+                            <span data-translate="hero_btn_cv">Download CV</span>
                         </a>
                     </div>
                 </div>
@@ -319,7 +312,7 @@
                         <div class="icon"><i class="fas fa-envelope"></i></div>
                         <div class="details">
                             <h4>Email</h4>
-                            <p><a href="mailto:jef.jeferson.sant@gmail.com">jef.jeferson.sant@gmail.com</a></p>
+                            <p><a href="/cdn-cgi/l/email-protection#80eae5e6aeeae5e6e5f2f3efeeaef3e1eef4c0e7ede1e9ecaee3efed"><span class="__cf_email__" data-cfemail="bfd5dad991d5dad9dacdccd0d191ccded1cbffd8d2ded6d391dcd0d2">[email&#160;protected]</span></a></p>
                         </div>
                     </div>
                     
@@ -338,6 +331,11 @@
                             <p><a href="https://github.com/jefsant-dev" target="_blank">jefsant-dev</a></p>
                         </div>
                     </div>
+
+                    <a href="arquivos/Currículo_Jeferson_Santos.pdf" download class="btn btn-primary contact-cv-btn">
+                        <i class="fas fa-file-pdf"></i>
+                        <span data-translate="contact_btn_cv">Download Currículo (PDF)</span>
+                    </a>
                 </div>
                 
                 <div class="contact-form">
@@ -417,11 +415,4 @@
             <span id="easterEggText">Easter Egg descoberto!</span>
         </div>
 
-        <!-- Confetti Container -->
-        <canvas id="confettiCanvas"></canvas>
-    </div>
-
-    <!-- Custom JavaScript -->
-    <script src="js/main.js"></script>
-</body>
-</html>
+        <!-- Confetti Contain
