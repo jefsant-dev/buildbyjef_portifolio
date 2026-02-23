@@ -1027,6 +1027,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
+    align-items: stretch;
 }
 
 .contact-info {
@@ -1153,7 +1154,7 @@ body {
 }
 
 .contact-cv-card {
-    margin-bottom: 1.5rem;
+    margin-top: auto;
 }
 
 /* Remove old CV button style */
@@ -1369,6 +1370,10 @@ body {
     .contact-container {
         grid-template-columns: 1fr;
         gap: 2rem;
+    }
+
+    .contact-cv-card {
+        margin-top: 0;
     }
     
     .hero-content h1 {
