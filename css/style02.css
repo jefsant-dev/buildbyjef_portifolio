@@ -545,7 +545,6 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
-    /* Sections are visible by default - animation is progressive enhancement */
 }
 
 .section::before {
@@ -557,18 +556,6 @@ body {
     width: 80%;
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--border-color), transparent);
-}
-
-/* Animate-in class: applied before section enters viewport */
-.section.animate-hidden {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.section.animate-hidden.visible {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 .section-title {
@@ -1163,6 +1150,15 @@ body {
 .social-link:hover {
     color: white;
     transform: translateY(-5px);
+}
+
+.contact-cv-card {
+    margin-bottom: 1.5rem;
+}
+
+/* Remove old CV button style */
+.contact-cv-btn {
+    display: none;
 }
 
 /* ===================================

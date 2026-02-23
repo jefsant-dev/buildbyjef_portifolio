@@ -187,7 +187,7 @@ const translations = {
         stat_projects: "Projetos Desenvolvidos",
         stat_dedication: "Dedicação",
         skills_title: "Habilidades & Tecnologias",
-        skills_subtitle: "Tecnologias e ferramentas que domino e utilizo no desenvolvimento",
+        skills_subtitle: "Tecnologias e ferramentas que domino e/ou já utilizei no desenvolvimento",
         skills_frontend: "Frontend",
         skills_backend: "Backend",
         skills_database: "Database & APIs",
@@ -224,6 +224,7 @@ const translations = {
         form_error: "Erro ao enviar mensagem. Por favor, tente novamente.",
         footer_text: " Jeferson Santos. Todos os direitos reservados.",
         contact_btn_cv: "Download Currículo (PDF)",
+        contact_cv_title: "Currículo",
         easter_found: "🎉 Easter Egg descoberto!",
         easter_dev: "🚀 Modo Desenvolvedor ativado!",
         easter_konami: "🎮 Código Konami! Você é old school!",
@@ -252,7 +253,7 @@ const translations = {
         stat_projects: "Developed Projects",
         stat_dedication: "Dedication",
         skills_title: "Skills & Technologies",
-        skills_subtitle: "Technologies and tools I master and use in development",
+        skills_subtitle: "Technologies and tools I master and/or have used in development",
         skills_frontend: "Frontend",
         skills_backend: "Backend",
         skills_database: "Database & APIs",
@@ -289,6 +290,7 @@ const translations = {
         form_error: "Error sending message. Please try again.",
         footer_text: " Jeferson Santos. All rights reserved.",
         contact_btn_cv: "Download Resume (PDF)",
+        contact_cv_title: "Resume",
         easter_found: "🎉 Easter Egg found!",
         easter_dev: "🚀 Developer Mode activated!",
         easter_konami: "🎮 Konami Code! You're old school!",
@@ -425,21 +427,27 @@ function initMobileMenu() {
 function initScrollAnimations() {
     const sections = document.querySelectorAll('.section');
 
-    // Mark sections for animation ONLY if IntersectionObserver is supported
-    if (!('IntersectionObserver' in window)) {
-        // Fallback: just show everything
-        sections.forEach(s => s.classList.add('visible'));
-        return;
+    // Apply initial hidden state via JS (so CSS never blocks content if JS fails)
+    sections.forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(28px)';
+        section.style.transition = 'opacity 0.75s ease, transform 0.75s ease';
+    });
+
+    function revealSection(section) {
+        section.style.opacity = '1';
+        section.style.transform = 'translateY(0)';
     }
 
-    sections.forEach(section => {
-        section.classList.add('animate-hidden');
-    });
+    if (!('IntersectionObserver' in window)) {
+        sections.forEach(revealSection);
+        return;
+    }
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+                revealSection(entry.target);
                 observer.unobserve(entry.target);
 
                 if (entry.target.id === 'about') {
@@ -449,19 +457,17 @@ function initScrollAnimations() {
         });
     }, {
         threshold: 0.05,
-        rootMargin: '0px 0px -50px 0px'
+        rootMargin: '0px 0px -40px 0px'
     });
 
     sections.forEach(section => observer.observe(section));
 
-    // Safety fallback: after 1.5s, reveal any sections still hidden
+    // Hard fallback: after 2s reveal everything still hidden
     setTimeout(() => {
         sections.forEach(s => {
-            if (!s.classList.contains('visible')) {
-                s.classList.add('visible');
-            }
+            if (s.style.opacity === '0') revealSection(s);
         });
-    }, 1500);
+    }, 2000);
 }
 
 // ===================================
