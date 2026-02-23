@@ -544,10 +544,8 @@ body {
     padding: 5rem 2rem 4rem;
     max-width: 1200px;
     margin: 0 auto;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease;
     position: relative;
+    /* Sections are visible by default - animation is progressive enhancement */
 }
 
 .section::before {
@@ -561,7 +559,14 @@ body {
     background: linear-gradient(90deg, transparent, var(--border-color), transparent);
 }
 
-.section.visible {
+/* Animate-in class: applied before section enters viewport */
+.section.animate-hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.section.animate-hidden.visible {
     opacity: 1;
     transform: translateY(0);
 }

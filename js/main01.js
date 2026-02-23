@@ -423,22 +423,45 @@ function initMobileMenu() {
 // SCROLL ANIMATIONS
 // ===================================
 function initScrollAnimations() {
+    const sections = document.querySelectorAll('.section');
+
+    // Mark sections for animation ONLY if IntersectionObserver is supported
+    if (!('IntersectionObserver' in window)) {
+        // Fallback: just show everything
+        sections.forEach(s => s.classList.add('visible'));
+        return;
+    }
+
+    sections.forEach(section => {
+        section.classList.add('animate-hidden');
+    });
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                
-                // Trigger counter animation for stats
+                observer.unobserve(entry.target);
+
                 if (entry.target.id === 'about') {
                     animateCounters();
                 }
             }
         });
-    }, { threshold: 0.1 });
-    
-    document.querySelectorAll('.section').forEach(section => {
-        observer.observe(section);
+    }, {
+        threshold: 0.05,
+        rootMargin: '0px 0px -50px 0px'
     });
+
+    sections.forEach(section => observer.observe(section));
+
+    // Safety fallback: after 1.5s, reveal any sections still hidden
+    setTimeout(() => {
+        sections.forEach(s => {
+            if (!s.classList.contains('visible')) {
+                s.classList.add('visible');
+            }
+        });
+    }, 1500);
 }
 
 // ===================================
