@@ -259,30 +259,27 @@ body {
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    display: flex;
+    align-items: center;
     text-decoration: none;
     position: relative;
+    flex-shrink: 0;
 }
 
-.logo::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--accent-gradient);
-    transform: scaleX(0);
+.logo-img {
+    height: 42px;
+    width: 42px;
+    border-radius: 10px;
+    display: block;
     transition: transform var(--transition-normal);
 }
 
-.logo:hover::after {
-    transform: scaleX(1);
+.logo:hover .logo-img {
+    transform: scale(1.08);
+}
+
+.logo::after {
+    display: none;
 }
 
 .nav-menu {
@@ -408,11 +405,14 @@ body {
 }
 
 .hero-content .subtitle {
-    font-size: 1.5rem;
+    font-size: 1.15rem;
     color: var(--text-secondary);
     margin-bottom: 1.5rem;
     animation: fadeInUp 0.8s ease 0.2s forwards;
     opacity: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .gradient-text {
@@ -452,8 +452,8 @@ body {
 
 .hero-buttons {
     display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+    gap: 0.75rem;
+    flex-wrap: nowrap;
     animation: fadeInUp 0.8s ease 0.6s forwards;
     opacity: 0;
 }
@@ -508,10 +508,10 @@ body {
     border: 1px solid var(--border-color);
 }
 
-.btn-secondary:hover {
-    background: var(--bg-hover);
-    transform: translateY(-3px);
-    border-color: var(--accent-primary);
+.hero-buttons .btn {
+    padding: 0.85rem 1.4rem;
+    font-size: 0.95rem;
+    white-space: nowrap;
 }
 
 .hero-image {
@@ -1333,6 +1333,10 @@ body {
    RESPONSIVE DESIGN
    =================================== */
 @media (max-width: 968px) {
+    .nav-container {
+        padding: 0 1rem;
+    }
+
     .nav-menu {
         position: fixed;
         top: 70px;
@@ -1389,7 +1393,8 @@ body {
     }
     
     .hero-content .subtitle {
-        font-size: 1.2rem;
+        font-size: 0.95rem;
+        white-space: normal;
     }
     
     .section-title {
@@ -1398,6 +1403,11 @@ body {
     
     .hero-buttons {
         flex-direction: column;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        justify-content: center;
     }
     
     .btn {
@@ -1409,9 +1419,21 @@ body {
         grid-template-columns: 1fr;
     }
     
+    /* Controls always on one row on mobile */
     .controls {
-        flex-direction: column;
-        gap: 0.5rem;
+        flex-direction: row;
+        gap: 0.4rem;
+        align-items: center;
+    }
+
+    .theme-toggle, .lang-toggle {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+    }
+
+    .logo-img {
+        height: 34px;
+        width: 34px;
     }
     
     .orb {

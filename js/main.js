@@ -459,16 +459,22 @@ function initHeaderScroll() {
 // PARALLAX EFFECT
 // ===================================
 function initParallax() {
-    const parallaxElements = document.querySelectorAll('.parallax-section, .parallax-element');
-    
+    // Only apply parallax to decorative/hero elements, never to content sections
+    const heroSection = document.querySelector('.hero');
+    const heroImage = document.querySelector('.hero-image');
+
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
-        
-        parallaxElements.forEach(element => {
-            const speed = element.dataset.speed || 0.5;
-            const yPos = -(scrolled * speed);
-            element.style.transform = `translateY(${yPos}px)`;
-        });
+
+        // Subtle parallax only on hero content (not enough to push it offscreen)
+        if (heroSection) {
+            heroSection.style.backgroundPositionY = scrolled * 0.3 + 'px';
+        }
+
+        // Hero image subtle float
+        if (heroImage) {
+            heroImage.style.transform = `translateY(${scrolled * 0.1}px)`;
+        }
     });
 }
 
@@ -511,13 +517,13 @@ function initPlexus() {
     const ctx = canvas.getContext('2d');
 
     let width, height, particles;
-    const PARTICLE_COUNT = 60;
-    const MAX_DIST = 150;
+    const PARTICLE_COUNT = 55;
+    const MAX_DIST = 140;
     const COLORS = ['rgba(99,102,241,', 'rgba(139,92,246,', 'rgba(0,200,220,'];
 
     function resize() {
-        width = canvas.width = canvas.offsetWidth;
-        height = canvas.height = canvas.offsetHeight;
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
     }
 
     function createParticles() {
@@ -527,8 +533,8 @@ function initPlexus() {
             particles.push({
                 x: Math.random() * width,
                 y: Math.random() * height,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5,
+                vx: (Math.random() - 0.5) * 0.45,
+                vy: (Math.random() - 0.5) * 0.45,
                 r: Math.random() * 2 + 1,
                 color
             });
@@ -551,10 +557,10 @@ function initPlexus() {
                 const dy = particles[i].y - particles[j].y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
                 if (dist < MAX_DIST) {
-                    const alpha = (1 - dist / MAX_DIST) * 0.35;
+                    const alpha = (1 - dist / MAX_DIST) * 0.3;
                     ctx.beginPath();
                     ctx.strokeStyle = particles[i].color + alpha + ')';
-                    ctx.lineWidth = 0.7;
+                    ctx.lineWidth = 0.6;
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
                     ctx.stroke();
@@ -565,7 +571,7 @@ function initPlexus() {
         particles.forEach(p => {
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = p.color + '0.7)';
+            ctx.fillStyle = p.color + '0.65)';
             ctx.fill();
         });
 
